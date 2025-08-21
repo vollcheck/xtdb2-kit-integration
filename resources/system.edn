@@ -47,9 +47,11 @@
 
  ;; refer to https://docs.xtdb.com/
  :db.xtdb2/node
- #profile {:dev {:xtdb.http-server/server {:port 3100}}
-           :test {}
-           :prod {}}
+ {:http-config {:xtdb.http-server/server {:port 3100}}
+  :db-mode #or [#env XTDB_MODE "memory"]}
+
+ :db.sql/connection {:jdbc-url #or [#env JDBC_URL "jdbc:xtdb://localhost/xtdb"]
+                     :xtdb-ref #ig/ref :db.xtdb2/node}
 
  :templating/selmer
  {}

@@ -11,6 +11,13 @@
   [_ xtdb-node]
   (.close xtdb-node))
 
+(defmethod ig/init-key :db.sql/connection
+  [_ config])
+
+(defmethod ig/halt-key! :db.sql/connection
+  [_ _])
+
+
 (defn list-todos
   "Lists all TODO items from the XTDB database.
    Returns a vector of TODO items with their IDs and details."
